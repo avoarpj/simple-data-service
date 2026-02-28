@@ -4,6 +4,8 @@ from apscheduler.jobstores.sqlalchemy import SQLAlchemyJobStore
 from core.dataset_loader.loader import get_datasets
 from core.module_loader import import_func_from_pyfile
 from core.paths import BASE_DIR
+import inspect
+import asyncio
 
 jobstores = {
     'default': SQLAlchemyJobStore(url='sqlite:///jobs.sqlite')
@@ -24,7 +26,10 @@ for dataset in datasets:
     trigger = CronTrigger.from_crontab(expr=dataset.updates.cron_expr) # type: ignore
     
     def cb():
-        fn(dataset)
+        if inspect.iscoroutinefunction(fn):
+            asyncio.run(fn(dataset))
+        else:
+            fn(dataset)
 
     scheduler.add_job( # type: ignore
         func=cb,

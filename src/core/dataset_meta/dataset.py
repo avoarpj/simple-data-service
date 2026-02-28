@@ -27,19 +27,19 @@ class DatasetMeta(BaseModel):
             
         return None
 
-
-
-    def download(self, download_input: Download, extractor: Extractor):
+    def download(self, download_input: Download, extractor: Extractor | None = None):
         output = BASE_DIR / download_input.output
 
         clear_target(output)
         download_stream(download_input.url, output)
-        extractor.extract(output, output.parent)
+        
+        if extractor != None:
+            extractor.extract(output, output.parent)
 
         fpath = output.parent / 'ftag.json'
         filetag.write_filetag_meta(fpath, filetag.FiletagMeta(createdAt=datetime.now()))
 
-    def downloadIfNecessary(self, extractor: Extractor):
+    def downloadIfNecessary(self, extractor: Extractor | None = None):
         for input in self.inputs:
             if input.download is None:
                 continue
