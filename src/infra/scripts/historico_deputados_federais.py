@@ -8,6 +8,14 @@ from core.paths import BASE_DIR
 from datetime import datetime
 import os
 
+"""
+Este script foi pensado para ser um "one-run", foi usado somente para gerar a versão inicial do Dump.
+Não há nenhum controle de datas, pulverização de requests, nada aqui, somente download do historico dos deputados que não estiverem presentes na lista de download.
+O tempo de execução ultrapassa às 7 horas caso não baixe o nosso dump.
+Baixe os arquivos (tar gz ou 7z) e descompacte em `temp-downloads/historico-deputados-federais` antes de rodar isso.
+https://github.com/avoarpj/simple-data-service/releases/tag/federal-deputies-history-snapshot
+"""
+
 def _onDownload(item: Item):
     write_filetag_meta(
         path=item.path.parent / "ftag.json",

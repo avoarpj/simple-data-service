@@ -30,3 +30,6 @@ for dataset in datasets:
         asyncio.run(fn(dataset))
     else:
         fn(dataset)
+
+    print("done")
+    exit()
