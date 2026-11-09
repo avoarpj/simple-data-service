@@ -1,5 +1,8 @@
 **Bem-vindo ao repositório!**
 
+> Este repositório foi arquivado pois o SDS foi incorporado definitivamente ao [Turi](https://github.com/avoarpj/turi); <br>
+> Propostas novas ao SDS devem ser feitas diretamente no novo repositório.
+
 # Avoar SDS 📂
 O SDS foi feito para gerar datasets nos principais formatos utilizados na web (csv, xml e json) derivados de conjuntos de dados mais complexos, para serem consumidos pelo Avoar e outros sistemas autônomos.
 
